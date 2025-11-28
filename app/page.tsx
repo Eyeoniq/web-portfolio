@@ -78,6 +78,11 @@ const gallery: GalleryItem[] = [
     media: '/window.svg',
     title: 'Product Animation',
     description: 'Concept animations demonstrating prototype functionality and design features.'
+  },
+    {
+    media: '/window.svg',
+    title: 'Product Animation',
+    description: 'Concept animations demonstrating prototype functionality and design features.'
   }
 ];
 
