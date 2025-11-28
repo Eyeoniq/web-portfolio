@@ -65,7 +65,7 @@ function Scene({ url }: { url: string }) {
 
 const gallery: GalleryItem[] = [
   {
-    media: '/67.glb',
+    media: '/globe.svg',
     title: '3D Model Showcase',
     description: 'High-quality hard-surface modeling for 3D printing and digital use.'
   },
