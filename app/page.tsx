@@ -288,14 +288,6 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Gallery Section */}
-      <section id="gallery" className="min-h-screen py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-8 md:mb-12 text-center">Featured Models</h2>
-          <InteractiveGallery isDarkMode={isDarkMode} folder="models" subfolderColumns={3} />
-        </div>
-      </section>
-
       {/* Animations/Renders Section */}
       <section id="renders" className={`min-h-screen py-16 md:py-20 transition-colors ${
         isDarkMode ? 'bg-slate-800/30' : 'bg-gray-100/50'
@@ -303,6 +295,14 @@ export default function Portfolio() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold mb-8 md:mb-12 text-center">Animations & Renders</h2>
           <InteractiveGallery isDarkMode={isDarkMode} folder="renders" maintainAspectRatio={true} />
+        </div>
+      </section>
+
+      {/* Gallery Section */}
+      <section id="gallery" className="min-h-screen py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-8 md:mb-12 text-center">Featured Models</h2>
+          <InteractiveGallery isDarkMode={isDarkMode} folder="models" subfolderColumns={3} />
         </div>
       </section>
 
