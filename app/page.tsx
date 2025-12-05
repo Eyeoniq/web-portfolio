@@ -6,12 +6,7 @@ import { OrbitControls, Environment, PerspectiveCamera, useGLTF } from '@react-t
 import { Menu, X, Mail, ExternalLink, Image as ImageIcon, Moon, Sun } from 'lucide-react';
 import Image from 'next/image';
 import * as THREE from 'three';
-
-interface GalleryItem {
-  media?: string;
-  title: string;
-  description: string;
-}
+import { InteractiveGallery } from '@/app/components/InteractiveGallery';
 
 interface ModelProps {
   url: string;
@@ -63,28 +58,7 @@ function Scene({ url }: { url: string }) {
   );
 }
 
-const gallery: GalleryItem[] = [
-  {
-    media: '/globe.svg',
-    title: '3D Model Showcase',
-    description: 'High-quality hard-surface modeling for 3D printing and digital use.'
-  },
-  {
-    media: '/globe.svg',
-    title: 'Cosplay Props',
-    description: 'Custom designed props optimized for 3D printing with proper supports and tolerances.'
-  },
-  {
-    media: '/window.svg',
-    title: 'Product Animation',
-    description: 'Concept animations demonstrating prototype functionality and design features.'
-  },
-    {
-    media: '/window.svg',
-    title: 'Product Animation',
-    description: 'Concept animations demonstrating prototype functionality and design features.'
-  }
-];
+
 
 export default function Portfolio() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -131,7 +105,7 @@ export default function Portfolio() {
             
             {/* Desktop Menu */}
             <div className="hidden md:flex space-x-8 items-center">
-              {['home', 'about', 'gallery', 'contact'].map((item) => (
+              {['home', 'about', 'gallery', 'renders', 'contact'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
@@ -139,7 +113,7 @@ export default function Portfolio() {
                     activeSection === item ? 'text-cyan-400' : ''
                   }`}
                 >
-                  {item}
+                  {item === 'renders' ? 'animations' : item}
                 </button>
               ))}
               <button
@@ -167,13 +141,13 @@ export default function Portfolio() {
             isDarkMode ? 'bg-slate-800 border-slate-700' : 'bg-gray-50 border-gray-200'
           }`}>
             <div className="px-4 py-4 space-y-3">
-              {['home', 'about', 'gallery', 'contact'].map((item) => (
+              {['home', 'about', 'gallery', 'renders', 'contact'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
                   className="block w-full text-left capitalize hover:text-cyan-400 transition-colors"
                 >
-                  {item}
+                  {item === 'renders' ? 'animations' : item}
                 </button>
               ))}
               <button
@@ -318,45 +292,17 @@ export default function Portfolio() {
       <section id="gallery" className="min-h-screen py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold mb-8 md:mb-12 text-center">Featured Models</h2>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {gallery.map((item, index) => (
-              <div key={index} className={`rounded-xl overflow-hidden border hover:border-cyan-500 transition-all ${
-                isDarkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-gray-200'
-              }`}>
-                <div className={`h-56 sm:h-64 flex items-center justify-center ${
-                  isDarkMode ? 'bg-slate-900' : 'bg-gray-100'
-                }`}>
-                  {item.media ? (
-                    item.media.endsWith('.glb') ? (
-                      <div className="w-full h-full">
-                        <Canvas>
-                          <Scene url={item.media} />
-                        </Canvas>
-                      </div>
-                    ) : (
-                      <div className="relative w-full h-full">
-                        <Image
-                          src={item.media}
-                          alt={item.title}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                    )
-                  ) : (
-                    <ImageIcon className="text-slate-600" size={64} />
-                  )}
-                </div>
-                <div className="p-4 md:p-6">
-                  <h3 className="text-lg md:text-xl font-bold mb-2">{item.title}</h3>
-                  <p className={`text-sm md:text-base transition-colors ${
-                    isDarkMode ? 'text-slate-400' : 'text-gray-600'
-                  }`}>{item.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <InteractiveGallery isDarkMode={isDarkMode} folder="models" subfolderColumns={3} />
+        </div>
+      </section>
+
+      {/* Animations/Renders Section */}
+      <section id="renders" className={`min-h-screen py-16 md:py-20 transition-colors ${
+        isDarkMode ? 'bg-slate-800/30' : 'bg-gray-100/50'
+      }`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-8 md:mb-12 text-center">Animations & Renders</h2>
+          <InteractiveGallery isDarkMode={isDarkMode} folder="renders" maintainAspectRatio={true} />
         </div>
       </section>
 
